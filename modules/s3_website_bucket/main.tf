@@ -45,32 +45,39 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
   })
 }
 
-# reading the content of the files in the repo
+# reading the content of the files in my cv githup epo
 
-data "github_repository_file" "html_file" {
-  repository = var.github_repo
-  branch     = var.github_branch
-  file       = "index.html"
+data "http" "html_file" {
+  url = "https://raw.githubusercontent.com/${var.github_repo}/${var.github_branch}/index.html"
+
+  request_headers = {
+    Accept = "application/vnd.github.v3.raw"
+  }
 }
 
-data "github_repository_file" "css_file" {
-  repository = var.github_repo
-  branch     = var.github_branch
-  file       = "css/styles.css"
+data "http" "css_file" {
+  url = "https://raw.githubusercontent.com/${var.github_repo}/${var.github_branch}/css/style.css"
+
+  request_headers = {
+    Accept = "application/vnd.github.v3.raw"
+  }
 }
 
 resource "aws_s3_object" "html_file" {
   bucket       = aws_s3_bucket.website_bucket.id
   key          = "index.html"
-  content      = data.github_repository_file.html_file.content
+  content      = data.http.html_file.response_body
   content_type = "text/html"
-  etag         = md5(data.github_repository_file.html_file.content)
+  etag         = md5(data.http.html_file.response_body)
 }
 
 resource "aws_s3_object" "css_file" {
   bucket       = aws_s3_bucket.website_bucket.id
   key          = "css/styles.css"
-  content      = data.github_repository_file.css_file.content
+  content      = data.http.css_file.response_body
   content_type = "text/css"
-  etag         = md5(data.github_repository_file.css_file.content)
-}
+  etag         = md5(data.http.css_file.response_body)
+
+  depends_on = [aws_s3_object.html_file]
+  
+  }
