@@ -1,6 +1,6 @@
 resource "aws_cloudfront_distribution" "cv_distribution" {
   origin {
-    domain_name = var.s3_bucket_website_endpoint
+    domain_name = var.s3_bucket_website_regional_domain_name
     origin_id   = "S3-${var.bucket_name}"
   }
 

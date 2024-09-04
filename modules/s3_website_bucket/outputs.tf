@@ -12,3 +12,13 @@ output "website_bucket_arn" {
   description = "ARN of the bucket"
   value       = aws_s3_bucket.website_bucket.arn
 }
+
+output "website_bucket_domain_name" {
+  description = "Bucket domain name"
+  value       = aws_s3_bucket.website_bucket.bucket_domain_name
+}
+
+output "website_bucket_regional_domain_name" {
+  description = "Bucket domain name"
+  value       = aws_s3_bucket.website_bucket.bucket_regional_domain_name
+}
