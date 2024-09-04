@@ -1,4 +1,4 @@
-variable "s3_bucket_website_endpoint" {
+variable "s3_bucket_website_regional_domain_name" {
   description = "The website endpoint of the S3 bucket"
   type        = string
 }
