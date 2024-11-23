@@ -5,3 +5,5 @@ cloud resume challege https://cloudresumechallenge.dev/docs/the-challenge/aws/
 
 I believe is a great idea to learn aws services like s3, lambda, cloudfront, api gateway, route 53
 and also infrastructure as code using terraform.
+
+The S3 module creates a bucket and pull the source of my cv to host it.
