@@ -24,3 +24,8 @@ variable "github_branch" {
   type        = string
   default     = "main"
 }
+
+variable "domain_name" {
+  description = "The domain name for the website"
+  type        = string
+}

@@ -16,3 +16,14 @@ module "cloud_distribution" {
   bucket_name                            = module.s3_website_bucket.website_bucket_domain_name
   depends_on                             = [module.s3_website_bucket]
 }
+
+module "route53" {
+  source = "./modules/route53"
+
+  domain_name               = var.domain_name
+  environment               = var.environment
+  cloudfront_domain_name    = module.cloudfront.cloudfront_distribution_domain_name
+  cloudfront_hosted_zone_id = "Z2FDTNDATAQYW2" # This is the fixed CloudFront hosted zone ID
+
+  depends_on = [module.cloud_distribution]
+}
