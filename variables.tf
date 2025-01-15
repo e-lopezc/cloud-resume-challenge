@@ -26,6 +26,17 @@ variable "github_branch" {
 }
 
 variable "domain_name" {
-  description = "The domain name for the website"
+  description = "The domain name for the cv website"
   type        = string
 }
+
+variable "create_zone" {
+  description = "Variable to control whether to create a hosted zone or use an existing one"
+  type        = bool
+}
+
+variable "ssl_certificate_arn"{
+  description = "SSL certificate arn issued for the domain name"
+  type        = string
+}
+

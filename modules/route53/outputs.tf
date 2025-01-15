@@ -1,14 +1,11 @@
-output "zone_id" {
+# output only assuming that there is an existing zone
+output "route53_zone_id" {
   description = "The hosted zone ID of the Route53 zone"
-  value       = aws_route53_zone.primary.zone_id
+  value       = aws_route53_record.mycv.zone_id
 }
 
-output "name_servers" {
-  description = "The name servers for the hosted zone"
-  value       = aws_route53_zone.primary.name_servers
-}
-
-output "domain_name" {
+output "route53_domain_cv_name" {
   description = "The domain name of the Route53 zone"
-  value       = var.domain_name
+  value       = aws_route53_record.mycv.name
 }
+

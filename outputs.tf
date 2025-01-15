@@ -15,10 +15,10 @@ output "cloudfront_distribution_domain_name" {
 
 output "route53_zone_id" {
   description = "Zone ID of the Route53 hosted zone"
-  value       = module.route53.zone_id
+  value       = module.route53.route53_zone_id
 }
 
-output "route53_name_servers" {
-  description = "Name servers for the Route53 zone"
-  value       = module.route53.name_servers
+output "route53_mycv_record" {
+  description = "subdomain name for mycv record"
+  value       = module.route53.route53_domain_cv_name
 }
