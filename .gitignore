@@ -36,8 +36,6 @@ terraform.rc
 # Ignore .terraform.lock.hcl file
 .terraform.lock.hcl
 
-# Ignore any .env files that might contain sensitive information
-*.env
 
 # Ignore Mac system files
 .DS_Store
