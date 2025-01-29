@@ -28,3 +28,10 @@ module "route53" {
   cloudfront_hosted_zone_id = "Z2FDTNDATAQYW2" # This is the fixed CloudFront hosted zone ID
   depends_on                = [module.cloud_distribution]
 }
+
+module "dynamodb_table"{
+  source = "./modules/dynamodb"
+  name = var.dynamodb_table_name
+  # TO complete
+}
+

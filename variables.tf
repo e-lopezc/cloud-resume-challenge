@@ -40,3 +40,8 @@ variable "ssl_certificate_arn"{
   type        = string
 }
 
+variable "dynamodb_table_name"{
+  description = "The dynamodb table name for the table that will hold the visitors info"
+  type = string
+}
+
