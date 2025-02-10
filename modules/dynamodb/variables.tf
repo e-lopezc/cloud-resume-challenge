@@ -4,32 +4,45 @@ variable "table_name" {
 }
 
 variable "billing_mode" {
-  description = "Billing method for the dynamodb table"
+  description = "Controls how we are charged for read and write throughput. Values are PROVISIONED or PAY_PER_REQUEST"
   type        = string
   default     = "PAY_PER_REQUEST"
 }
 
+variable "read_capacity_units" {
+  description = "The number of read units for this table. If the billing_mode is PROVISIONED, this field is required"
+  type        = number
+  default     = null
+}
+
+variable "write_capacity_units" {
+  description = "The number of write units for this table. If the billing_mode is PROVISIONED, this field is required"
+  type        = number
+  default     = null
+}
+
 variable "attribute_definitions" {
-  description = "A list of attribute definitions for the DynamoDB table"
+  description = "List of attribute definitions"
   type = list(object({
-    attribute_name = string
-    attribute_type = string
+    name = string
+    type = string
   }))
+   default = [
+    {
+      name = "VisitorId"
+      type = "S"
+    }
+  ]
 }
 
 variable "hash_key" {
   description = "The name of the hash key attribute"
   type        = string
+  default = "VisitorId"
 }
 
 variable "range_key" {
   description = "The name of the range key attribute (optional)"
-  type        = number
+  type        = string
   default     = null
-}
-
-variable "tags"{
-  description = "Tags of the project"
-  type = string
-  default = null
 }

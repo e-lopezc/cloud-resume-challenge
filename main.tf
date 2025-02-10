@@ -29,9 +29,10 @@ module "route53" {
   depends_on                = [module.cloud_distribution]
 }
 
-module "dynamodb_table"{
-  source = "./modules/dynamodb"
-  name = var.dynamodb_table_name
-  # TO complete
+module "dynamodb_table" {
+  source      = "./modules/dynamodb"
+  table_name  = var.dynamodb_table_name
+  environment = var.environment
+  #left default values for rest of variables
 }
 
