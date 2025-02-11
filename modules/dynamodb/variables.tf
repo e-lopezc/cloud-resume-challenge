@@ -1,3 +1,8 @@
+variable "environment" {
+  description = "environment (dev, staging, prod)"
+  type        = string
+}
+
 variable "table_name" {
   description = "The name of the DynamoDB table"
   type        = string
@@ -46,3 +51,4 @@ variable "range_key" {
   type        = string
   default     = null
 }
+
