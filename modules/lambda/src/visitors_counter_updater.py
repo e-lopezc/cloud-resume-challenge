@@ -31,12 +31,12 @@ def lambda_handler(event, context):
 
         # Try to get the item
         try:
-            response = table.get_item(Key={"id": "1"})
+            response = table.get_item(Key={"VisitorId": "1"})
 
             # Check if item exists
             if "Item" not in response:
                 logger.warning(
-                    f"Item with id '1' not found in table {dynamodb_table_name}"
+                    f"Item with VisitorId '1' not found in table {dynamodb_table_name}"
                 )
                 # Initialize with views = 1 if item doesn't exist
                 views = 1
@@ -47,7 +47,7 @@ def lambda_handler(event, context):
             logger.info(f"Updated view counter: {views}")
 
             # Update the item
-            table.put_item(Item={"id": "1", "views": views})
+            table.put_item(Item={"VisitorId": "1", "views": views})
 
             return {"statusCode": 200, "body": json.dumps(views)}
 

@@ -37,6 +37,11 @@ resource "aws_iam_role" "visitors_counter_updater_role" {
       Action = "sts:AssumeRole"
     }]
   })
+
+  tags = {
+    Name        = "${var.lambda_name}_role"
+    Environment = var.environment
+  }
 }
 
 resource "aws_iam_policy" "visitors_counter_updater_policy" {
@@ -66,6 +71,11 @@ resource "aws_iam_policy" "visitors_counter_updater_policy" {
       ]
     }
   )
+  tags = {
+    Name        = "${var.lambda_name}_policy"
+    Environment = var.environment
+  }
+
 }
 
 resource "aws_iam_role_policy_attachment" "policy_to_lambda_role" {
@@ -85,4 +95,5 @@ resource "aws_lambda_function_url" "visitors_counter_updater_url" {
     expose_headers    = ["keep-alive", "date"]
     max_age           = 86400
   }
+
 }
