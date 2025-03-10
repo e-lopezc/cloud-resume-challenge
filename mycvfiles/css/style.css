@@ -29,6 +29,10 @@ h1 {
     margin-bottom: 10px;
 }
 
+.visits-counter {
+    margin-bottom: 10px;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
