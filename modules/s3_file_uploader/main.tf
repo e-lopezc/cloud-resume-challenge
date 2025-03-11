@@ -8,8 +8,8 @@ resource "aws_s3_object" "cvfiles" {
   etag = filemd5("${var.source_directory}${each.value}")
 
   content_type = lookup({
-    ".html" = "text/html",
-    ".css"  = "text/css",
-    ".js"   = "application/javascript"
-  }, regex("\\.(html|css|js)$", each.value), "application/octet-stream")
+    "html" = "text/html",
+    "css"  = "text/css",
+    "js"   = "application/javascript"
+  }, regex("\\.(\\w+)$", each.value)[0], "application/octet-stream")
 }

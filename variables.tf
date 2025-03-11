@@ -35,13 +35,17 @@ variable "create_zone" {
   type        = bool
 }
 
-variable "ssl_certificate_arn"{
+variable "ssl_certificate_arn" {
   description = "SSL certificate arn issued for the domain name"
   type        = string
 }
 
-variable "dynamodb_table_name"{
+variable "dynamodb_table_name" {
   description = "The dynamodb table name for the table that will hold the visitors counter"
-  type = string
+  type        = string
 }
 
+variable "lambda_name" {
+  description = "The dynamodb table name for the table that will hold the visitors counter"
+  type        = string
+}

@@ -36,3 +36,15 @@ module "dynamodb_table" {
   #left default values for rest of variables
 }
 
+module "lambda_visitors_counter" {
+  source              = "./modules/lambda"
+  lambda_name         = var.lambda_name
+  dynamodb_table_name = var.dynamodb_table_name
+  environment         = var.environment
+}
+
+module "cvfiles_s3_uploader" {
+  source      = "./modules/s3_file_uploader"
+  bucket_name = var.bucket_name
+  depends_on  = [module.s3_website_bucket, module.lambda_visitors_counter]
+}

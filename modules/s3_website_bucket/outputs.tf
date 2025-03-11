@@ -19,6 +19,6 @@ output "website_bucket_domain_name" {
 }
 
 output "website_bucket_regional_domain_name" {
-  description = "Bucket domain name"
+  description = "Bucket regional domain name"
   value       = aws_s3_bucket.website_bucket.bucket_regional_domain_name
 }

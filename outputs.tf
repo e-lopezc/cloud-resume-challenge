@@ -22,3 +22,13 @@ output "route53_mycv_record" {
   description = "subdomain name for mycv record"
   value       = module.route53.route53_domain_cv_name
 }
+
+output "dynamo_table_name" {
+  description = "Dynamo table name"
+  value       = module.dynamodb_table.dynamodb_table_name
+}
+
+output "lambda_visitors_counter_url" {
+  description = "Lambda visitors counter function url"
+  value       = module.lambda_visitors_counter.lambda_visitors_counter_updater_url.function_url
+}

@@ -11,7 +11,7 @@ resource "aws_lambda_function" "visitors_counter_updater" {
   role             = aws_iam_role.visitors_counter_updater_role.arn
   handler          = "visitors_counter_updater.lambda_handler"
   runtime          = "python3.12"
-  source_code_hash = filebase64sha256("${path.module}/src/visitor_counter_updater.py")
+  source_code_hash = filebase64sha256("${path.module}/src/visitors_counter_updater.py")
   environment {
     variables = {
       DYNAMO_TABLE_NAME = "${var.dynamodb_table_name}"
