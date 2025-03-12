@@ -32,7 +32,7 @@ variable "attribute_definitions" {
     name = string
     type = string
   }))
-   default = [
+  default = [
     {
       name = "VisitorId"
       type = "S"
@@ -43,7 +43,7 @@ variable "attribute_definitions" {
 variable "hash_key" {
   description = "The name of the hash key attribute"
   type        = string
-  default = "VisitorId"
+  default     = "VisitorId"
 }
 
 variable "range_key" {
