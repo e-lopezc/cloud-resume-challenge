@@ -43,7 +43,13 @@ module "lambda_visitors_counter" {
   environment         = var.environment
 }
 
-module "cvfiles_s3_uploader" {
+module "counter_js" {
+  source       = "./modules/js-file-generator"
+  url_endpoint = module.lambda_visitors_counter.function_url
+  output_path  = ".modules/s3_file_uploader/js/counter.js"
+}
+
+module "s3_uploader_cv_files" {
   source      = "./modules/s3_file_uploader"
   bucket_name = var.bucket_name
   depends_on  = [module.s3_website_bucket, module.lambda_visitors_counter]
