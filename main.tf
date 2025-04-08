@@ -43,14 +43,18 @@ module "lambda_visitors_counter" {
   environment         = var.environment
 }
 
-module "counter_js" {
-  source       = "./modules/js-file-generator"
+module "visits_counter_js" {
+  source       = "./modules/js_file_creator"
   url_endpoint = module.lambda_visitors_counter.function_url
-  output_path  = ".modules/s3_file_uploader/js/counter.js"
+  output_path  = ".modules/mycvfiles/js/counter.js"
 }
 
 module "s3_uploader_cv_files" {
   source      = "./modules/s3_file_uploader"
   bucket_name = var.bucket_name
-  depends_on  = [module.s3_website_bucket, module.lambda_visitors_counter]
+  depends_on = [
+    module.s3_website_bucket,
+    module.lambda_visitors_counter,
+    module.visits_counter_js
+  ]
 }
