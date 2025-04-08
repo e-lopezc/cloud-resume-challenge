@@ -4,7 +4,7 @@ const counter = document.querySelector(".visits-number");
 async function updateCounter() {
   let response = await fetch("${var.url_endpoint}");
   let data = await response.json();
-  counter.innerHTML = `\${data}`;
+  counter.innerHTML = data.toString();
 }
 updateCounter();
 EOT

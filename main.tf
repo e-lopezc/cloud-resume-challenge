@@ -45,8 +45,8 @@ module "lambda_visitors_counter" {
 
 module "visits_counter_js" {
   source       = "./modules/js_file_creator"
-  url_endpoint = module.lambda_visitors_counter.function_url
-  output_path  = ".modules/mycvfiles/js/counter.js"
+  url_endpoint = module.lambda_visitors_counter.lambda_visitors_counter_updater_url
+  output_path  = "./modules/mycvfiles/js/counter.js"
 }
 
 module "s3_uploader_cv_files" {
