@@ -7,6 +7,14 @@ resource "aws_s3_bucket" "website_bucket" {
   }
 }
 
+resource "aws_s3_bucket_ownership_controls" "website_bucket_ownership" {
+  bucket = aws_s3_bucket.website_bucket.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
 resource "aws_s3_bucket_website_configuration" "website_configuration" {
   bucket = aws_s3_bucket.website_bucket.id
 
@@ -19,28 +27,26 @@ resource "aws_s3_bucket_website_configuration" "website_configuration" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "website_public_access_block" {
-  bucket = aws_s3_bucket.website_bucket.id
 
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
-}
-
+# S3 bucket policy - Only allow access from CloudFront OAI
 resource "aws_s3_bucket_policy" "website_bucket_policy" {
+
+  # Only apply this policy if OAI ARN is provided
+  count  = var.cloudfront_oai_arn != "" ? 1 : 0
   bucket = aws_s3_bucket.website_bucket.id
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "PublicReadGetObject"
-        Effect    = "Allow"
-        Principal = "*" # This needs to change to cloudfront principal to allow only cloudfront.
-        Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.website_bucket.arn}/*"
-      },
+        Sid    = "AllowCloudFrontServicePrincipal"
+        Effect = "Allow"
+        Principal = {
+          AWS = var.cloudfront_oai_arn
+        }
+        Action   = "s3:GetObject"
+        Resource = "${aws_s3_bucket.website_bucket.arn}/*"
+      }
     ]
   })
 }

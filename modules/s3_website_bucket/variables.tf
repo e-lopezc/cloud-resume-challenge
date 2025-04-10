@@ -18,3 +18,9 @@ variable "github_branch" {
   type        = string
   default     = "main"
 }
+
+variable "cloudfront_oai_arn" {
+  description = "ARN of CloudFront Origin Access Identity"
+  type        = string
+  default     = ""
+}
